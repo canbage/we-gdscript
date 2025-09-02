@@ -15,8 +15,8 @@ func _init(ranks : int = 8, files : int = 8) -> void:
 			board[x].append(null)
 
 
-func set_piece(rank : int, file : int, side : Piece.Side, type) -> void:
-	board[rank][file] = type.new(rank, file, side)
+func set_piece(rank : int, file : int, side : Piece.Side, type : String) -> void:
+	board[rank][file] = Piece.new(rank, file, side, type)
 
 
 func remove_piece(rank : int, file : int) -> void:

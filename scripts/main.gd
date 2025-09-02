@@ -7,7 +7,7 @@ var board : Board
 func _ready() -> void:
 	board = Board.new()
 	board.print_readable_board()
-	board.set_piece(0, 0, Piece.Side.WHITE, King)
+	board.set_piece(0, 0, Piece.Side.WHITE, "King")
 	board.print_readable_piece_data(0, 0)
 	
 	var file = FileAccess.get_file_as_string("res://scripts/pieces/pieces.json")

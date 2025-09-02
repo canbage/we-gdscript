@@ -1,18 +1,5 @@
 class_name Piece
 
-const UP = Vector2i(0, -1)
-const UP_RIGHT = Vector2i(1, -1)
-const RIGHT = Vector2i(1, 0)
-const DOWN_RIGHT = Vector2i(1, 1)
-const DOWN = Vector2i(0, 1)
-const DOWN_LEFT = Vector2i(-1, 1)
-const LEFT = Vector2i(-1, 0)
-const UP_LEFT = Vector2i(-1, -1)
-
-var rank : int
-var file : int
-var position_vector : Array
-var side : Side
 
 enum Side {
 	WHITE,
@@ -21,12 +8,42 @@ enum Side {
 	SPY,
 }
 
+const UP = [0, -1]
+const UP_RIGHT = [1, -1]
+const RIGHT = [1, 0]
+const DOWN_RIGHT = [1, 1]
+const DOWN = [0, 1]
+const DOWN_LEFT = [-1, 1]
+const LEFT = [-1, 0]
+const UP_LEFT = [-1, -1]
 
-func _init(rank : int, file : int, side = Piece.Side) -> void:
+static var piece_data
+
+var rank : int
+var file : int
+var position_vector : Array
+var side : Piece.Side
+
+var type : String
+var uses_special_movement : bool
+var movement
+
+static func load_piece_data() -> void:
+	if piece_data:
+		return
+	var raw_data = FileAccess.get_file_as_string("res://scripts/pieces/pieces.json")
+	piece_data = JSON.parse_string(raw_data)
+
+
+func _init(rank : int, file : int, side : Piece.Side, piece : String) -> void:
 	self.rank = rank
 	self.file = file
 	position_vector = [rank, file]
 	self.side = side
+	
+	load_piece_data()
+	
+	type = piece_data.King.type
 
 
 func get_available_moves(board : Array) -> Array:
@@ -53,7 +70,7 @@ func multiply_array(a : Array, b : int) -> Array:
 func get_general_data() -> Dictionary:
 	var data := {
 		side = side,
-		type = get_script().get_global_name(),
+		type = type,
 		rank = rank,
 		file = file,
 	}

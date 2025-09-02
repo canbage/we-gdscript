@@ -1,5 +1,16 @@
 {
 	"King": {
-		"test": true
+		"type": "King",
+		"uses_special_movement": true,
+		"movement": [
+			[0, -1],
+			[1, -1],
+			[1, 0],
+			[1, 1],
+			[0, 1],
+			[-1, 1],
+			[-1, 0],
+			[-1, -1]
+		],
 	}
 }
