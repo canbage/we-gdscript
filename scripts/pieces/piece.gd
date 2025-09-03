@@ -17,22 +17,22 @@ const DOWN_LEFT = [-1, 1]
 const LEFT = [-1, 0]
 const UP_LEFT = [-1, -1]
 
-static var piece_data
+static var parsed_piece_data
 
 var rank : int
 var file : int
 var position_vector : Array
 var side : Piece.Side
 
+var this_piece_data : Dictionary
 var type : String
-var uses_special_movement : bool
 var movement
 
 static func load_piece_data() -> void:
-	if piece_data:
+	if parsed_piece_data:
 		return
 	var raw_data = FileAccess.get_file_as_string("res://scripts/pieces/pieces.json")
-	piece_data = JSON.parse_string(raw_data)
+	parsed_piece_data = JSON.parse_string(raw_data)
 
 
 func _init(rank : int, file : int, side : Piece.Side, piece : String) -> void:
@@ -43,11 +43,19 @@ func _init(rank : int, file : int, side : Piece.Side, piece : String) -> void:
 	
 	load_piece_data()
 	
-	type = piece_data.King.type
+	this_piece_data = parsed_piece_data[piece]
+	
+	type = this_piece_data.type
+	movement = this_piece_data.movement
 
 
-func get_available_moves(board : Array) -> Array:
-	return []
+func get_available_moves(board : Array) -> Dictionary:
+	if movement is Dictionary:
+		for i in movement:
+			print(movement[i])
+	
+	
+	return {}
 
 
 func scan_direction(steps : int, direction : Array) -> Array:

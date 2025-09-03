@@ -1,16 +1,39 @@
 {
 	"King": {
 		"type": "King",
-		"uses_special_movement": true,
+		"movement": {
+			"up": 1,
+			"up_right": 1,
+			"right": 1,
+			"down_right": 1,
+			"down": 1,
+			"down_left": 1,
+			"left": 1,
+			"up_left": 1,
+		},
+	},
+	
+	"Rook": {
+		"type": "Rook",
+		"movement": {
+			"up": 8,
+			"right": 8,
+			"down": 8,
+			"left": 8,
+		},
+	},
+	
+	"Knight": {
+		"type": "Knight",
 		"movement": [
-			[0, -1],
-			[1, -1],
-			[1, 0],
-			[1, 1],
-			[0, 1],
-			[-1, 1],
-			[-1, 0],
-			[-1, -1]
-		],
-	}
+			[2, 1],
+			[2, -1],
+			[-2, 1],
+			[-2, -1],
+			[1, 2],
+			[1, -2],
+			[-1, 2],
+			[-1, -2],
+		]
+	},
 }

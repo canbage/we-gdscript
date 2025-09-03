@@ -1,8 +1,8 @@
 class_name King extends Piece
 
-func get_available_moves(board : Array) -> Array:
-	
-	return []
+#func get_available_moves(board : Array) -> Array:
+	#
+	#return []
 
 var data : Dictionary = {
 	name = "",

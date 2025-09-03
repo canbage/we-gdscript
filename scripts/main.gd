@@ -13,4 +13,4 @@ func _ready() -> void:
 	var file = FileAccess.get_file_as_string("res://scripts/pieces/pieces.json")
 	var parsed_data = JSON.parse_string(file)
 	
-	print(parsed_data)
+	board.get_piece(0, 0).get_available_moves(board.board)
